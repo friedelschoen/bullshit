@@ -82,15 +82,17 @@ func randomChoice(options []string) string {
 }
 
 // generateBullshit generates and returns a single nonsense sentence.
-func generateBullshit() string {
-	var result []string
+func generateBullshit() {
 	totalWords := rand.Intn(8) + 3
 	outputCount := 0
+	lastword := ""
+	hassuffix := false
 
 	// Add starting words
 	numStarts := rand.Intn(4)
 	for i := 0; i < numStarts; i++ {
-		result = append(result, randomChoice(words["start"]))
+		lastword = randomChoice(words["start"])
+		fmt.Printf("%s ", lastword)
 		outputCount++
 	}
 
@@ -101,12 +103,14 @@ func generateBullshit() string {
 		numWords = rand.Intn(remaining + 1)
 	}
 	for i := 0; i < numWords; i++ {
-		word := randomChoice(words["word"])
-		suffix := ""
-		if rand.Float64() < 0.2 {
-			suffix = randomChoice(words["suffix"])
+		lastword = randomChoice(words["word"])
+		hassuffix = rand.Float64() < 0.2
+		if hassuffix {
+			suffix := randomChoice(words["suffix"])
+			fmt.Printf("%s%s ", lastword, suffix)
+		} else {
+			fmt.Printf("%s ", lastword)
 		}
-		result = append(result, word+suffix)
 		outputCount++
 	}
 
@@ -114,9 +118,10 @@ func generateBullshit() string {
 	if rand.Float64() > 0.5 {
 		numProtocols := rand.Intn(4)
 		for i := 0; i < numProtocols; i++ {
-			result = append(result, randomChoice(words["protocol"]))
+			lastword = randomChoice(words["protocol"])
+			fmt.Printf("%s ", lastword)
 			if i != numProtocols-1 {
-				result = append(result, "over")
+				fmt.Printf("over ")
 			}
 		}
 		outputCount++
@@ -132,21 +137,23 @@ func generateBullshit() string {
 		numMoreWords += 2
 	}
 	for i := 0; i < numMoreWords; i++ {
-		word := randomChoice(words["word"])
-		suffix := ""
-		if rand.Float64() < 0.2 {
-			suffix = randomChoice(words["suffix"])
+		lastword = randomChoice(words["word"])
+		hassuffix = rand.Float64() < 0.2
+		if hassuffix {
+			suffix := randomChoice(words["suffix"])
+			fmt.Printf("%s%s ", lastword, suffix)
+		} else {
+			fmt.Printf("%s ", lastword)
 		}
-		result = append(result, word+suffix)
 		outputCount++
 	}
 
 	// Optionally add an ending
-	if rand.Float64() < 0.1 || noends[result[len(result)-1]] {
-		result = append(result, randomChoice(words["end"]))
+	if rand.Float64() < 0.1 || noends[lastword] || hassuffix {
+		fmt.Printf("%s\n", randomChoice(words["end"]))
+	} else {
+		fmt.Println()
 	}
-
-	return strings.Join(result, " ")
 }
 
 // min returns the smaller of two integers.
@@ -205,6 +212,6 @@ func main() {
 
 	// Generate sentences
 	for i := 0; i < times; i++ {
-		fmt.Println(generateBullshit())
+		generateBullshit()
 	}
 }

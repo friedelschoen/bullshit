@@ -1,0 +1,85 @@
+.TH BULLSHIT 1 "January 2025" "Python Bullshit Generator" "User Commands"
+.SH NAME
+\fBbullshit\fP \- generate random nonsense phrases from words in a file
+.SH SYNOPSIS
+\fBbullshit\fP [\fIn\fP] [\fB-f file\fP]
+.SH DESCRIPTION
+The \fBbullshit\fP program generates one or more nonsense phrases by randomly combining words and phrases from a predefined data file. 
+The phrases are constructed using categories such as starting words, suffixes, protocols, and endings, producing jargon-filled or humorous output.
+
+By default, \fBbullshit\fP looks for a word file in the following order:
+.IP 1.
+The path specified in the environment variable \fBBULLSHIT_FILE\fP.
+.IP 2.
+The file \fB~/.bullshit\fP in the user's home directory.
+
+The generated nonsense may include technical buzzwords, protocols, and random combinations, making it useful for parody, creative output, or fun.
+
+.SH OPTIONS
+.TP
+\fIn\fP
+Specify the number of sentences to generate. Defaults to \fB1\fP if omitted.
+.TP
+\fB-f file\fP, \fB--file file\fP
+Specify a custom data file. If omitted, \fBbullshit\fP uses \fBBULLSHIT_FILE\fP or \fB~/.bullshit\fP.
+
+.SH ENVIRONMENT
+.TP
+\fBBULLSHIT_FILE\fP
+If set, specifies the path to the default data file. This overrides the default behavior of using \fB~/.bullshit\fP.
+
+.SH FILE FORMAT
+The data file must contain one word or phrase per line, optionally followed by a suffix indicating its type. The types are:
+.TP
+\fB*\fP
+Protocols (e.g., \fBHTTP\fP, \fBSSL\fP).
+.TP
+\fB$\fP
+Endings (e.g., \fBmanager\fP, \fBinterface\fP).
+.TP
+\fB%\fP
+Suffixes (e.g., \fB-driven\fP, \fB-enabled\fP).
+.TP
+\fB^\fP
+Starting words (e.g., \fBcloud\fP, \fBagile\fP).
+.TP
+\fB|\fP
+Words that cannot end a phrase (e.g., \fBrealtime\fP, \fBcache\fP).
+.TP
+No suffix
+General words used in the phrase.
+
+.SH EXAMPLES
+.TP
+Generate a single nonsense phrase:
+.RS
+\fBbullshit\fP
+.RE
+.TP
+Generate 5 nonsense phrases:
+.RS
+\fBbullshit 5\fP
+.RE
+.TP
+Generate nonsense phrases using a custom file:
+.RS
+\fBbullshit -f custom_bullshit.txt\fP
+.RE
+.TP
+Set a default file via environment variable:
+.RS
+\fBexport BULLSHIT_FILE=/path/to/bullshit.txt\fP
+.br
+\fBbullshit\fP
+.RE
+
+.SH FILES
+.TP
+\fBBULLSHIT_FILE\fP
+Specifies the default data file if set.
+.TP
+\fB~/.bullshit\fP
+Fallback default data file.
+
+.SH HISTORY
+\fBbullshit\fP first appeared as part of Plan 9’s 9front distribution (August 2011). This Python implementation retains the original spirit of generating random nonsense phrases.

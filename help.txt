@@ -5,4 +5,5 @@ The phrases are constructed using categories such as starting words, suffixes, p
 
 Options:
   -h --help .......... print usage and exit
+  -s --sort .......... sort input file and print to stdout
   -f --file <input> .. input file

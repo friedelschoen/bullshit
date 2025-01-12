@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -58,14 +59,15 @@ func loadData(filePath string) error {
 		if line == "" {
 			continue
 		}
-		if strings.HasPrefix(line, "%") {
+		switch {
+		case strings.HasPrefix(line, "%"):
 			currentCategory = line[1:]
 			words[currentCategory] = []string{}
-		} else if strings.HasPrefix(line, "!") {
-			word := line[1:]
-			words[currentCategory] = append(words[currentCategory], word)
-			noends[word] = true
-		} else {
+		case strings.HasPrefix(line, "!"):
+			line = line[1:]
+			noends[line] = true
+			fallthrough
+		default:
 			words[currentCategory] = append(words[currentCategory], line)
 		}
 	}
@@ -172,8 +174,41 @@ func usage(exit int) {
 	os.Exit(exit)
 }
 
+func printSorted() {
+	keys := make([]string, len(words))
+	i := 0
+	for key := range words {
+		keys[i] = key
+		i++
+	}
+	slices.Sort(keys)
+	for i, key := range keys {
+		values := words[key]
+		if i > 0 {
+			fmt.Println()
+		}
+		fmt.Println("%" + key)
+		slices.SortFunc(values, func(left, right string) int {
+			if noends[left] != noends[right] {
+				if noends[left] {
+					return 1
+				}
+				return -1
+			}
+			return strings.Compare(left, right)
+		})
+		for _, value := range values {
+			if noends[value] {
+				fmt.Print("!")
+			}
+			fmt.Println(value)
+		}
+	}
+}
+
 func main() {
 	file := ""
+	sort := false
 	times := 1
 	var err error
 	for i := 1; i < len(os.Args); i++ {
@@ -185,6 +220,9 @@ func main() {
 			}
 			i++
 			file = os.Args[i]
+		case "-s", "--sort":
+			sort = true
+			i++
 		default:
 			if os.Args[i][0] == '-' {
 				fmt.Fprintf(os.Stderr, "error: unknown option `%s`\n", os.Args[i])
@@ -210,8 +248,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Generate sentences
-	for i := 0; i < times; i++ {
-		generateBullshit()
+	if sort {
+		printSorted()
+	} else {
+		for i := 0; i < times; i++ {
+			generateBullshit()
+		}
 	}
 }

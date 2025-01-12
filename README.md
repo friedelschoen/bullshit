@@ -29,17 +29,18 @@ go build bullshit.go
 ## Usage
 
 ```bash
-./bullshit [-f file] [times]
+./bullshit [-s] [-f file] [times]
 ```
 
 ### Options
 
 - `times`: (Optional) The number of sentences to generate. Default is `1`.
 - `-f file`: (Optional) Specify a custom data file. If omitted, the program uses:
-  1.     The path specified in the environment variable BULLSHIT_FILE.
-  2.     The file ~/$XDG_CONFIG_HOME/bullshit.txt or ~/.config/bullshit.txt in the user's home directory.
-  3.     The file /usr/share/bullshit.txt.
-              
+  1. The path specified in the environment variable `$BULLSHIT_FILE`.
+  2. The file `$XDG_CONFIG_HOME/bullshit.txt` or `~/.config/bullshit.txt`.
+  3. The file `/usr/share/bullshit.txt`.
+- `-s`: (Optional) Sort input records and print sorted file to stdout
+
 ### Examples
 
 #### Generate a Single Nonsense Phrase

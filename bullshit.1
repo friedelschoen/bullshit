@@ -2,7 +2,7 @@
 .SH NAME
 \fBbullshit\fP \- generate random nonsense phrases from words in a file
 .SH SYNOPSIS
-\fBbullshit\fP [\fIn\fP] [\fB-f file\fP]
+\fBbullshit\fP [\fB-f file\fP] [-hs] [times]
 .SH DESCRIPTION
 The \fBbullshit\fP program generates one or more nonsense phrases by randomly combining words and phrases from a predefined data file. 
 The phrases are constructed using categories such as starting words, suffixes, protocols, and endings, producing jargon-filled or humorous output.
@@ -19,11 +19,14 @@ The generated nonsense may include technical buzzwords, protocols, and random co
 
 .SH OPTIONS
 .TP
-\fIn\fP
+\fItimes\fP
 Specify the number of sentences to generate. Defaults to \fB1\fP if omitted.
 .TP
 \fB-f file\fP, \fB--file file\fP
 Specify a custom data file. If omitted, \fBbullshit\fP uses \fBBULLSHIT_FILE\fP or \fB~/.bullshit\fP.
+.TP
+\fB-s\fP, \fB--sort\fP
+Sortd input records and print sorted file to stdout.
 
 .SH ENVIRONMENT
 .TP

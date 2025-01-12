@@ -1,467 +1,526 @@
-cloud
-grid
-engine
-metadata
-replication
-factory
-strategy
-configuration
-interface
-singleton
-framework
-NoSQL |
+%word
+AI
+AI-assistance
+AMP
+API
+CMS
+CSS
+DL
+DOM
+Data-lake
+Data-mesh
+Edge-computing
+Elastic
+Event-driven
+Eventual-consistency
+FinOps
+Full-stack
+GPU
+Green-computing
+IoT
+Kubernetes-native
+ML
+Multi-cloud
+Observability
+Privacy-enhancing
+Privacy-first
+Quantum-safe
+Reactive
+Serverless
+Site-reliability-engineering
+Zero-downtime
+Zero-trust
+adaptive-computing
+alignment
+auto-discovery
+auto-scaling
+big-data
+block-device
+blockchain
+browser
 cache
-persistence |
-self-signing |
-scripting |
-flat-hierarchy |
-template
+callback
+cloud
+collaboration
+component
+configuration
+container-orchestration
+context-switching
+continuous-delivery
+continuous-integration
+core
+cross-compiler
+data-fabric
+data-governance
+data-mining
+data-obfuscation
+database
+deep-inference
+descriptor
+disruption
+distributed-ledger
+docker
+ecosystem
+edge-optimized
+empowerment
+engine
+event
+event-sourcing
+event-streaming
+extension
+factory
+firewall
+framework
+full-duplex
+function-as-a-service
+graph-database
+grid
+growth-hacking
+hardware
+headless
+hosting
+hypervisor
+identity-federation
+infrastructure
+injection
+innovation
+interface
+key-value
+kubernetes
+leverage
+lifecycle
+low-code-development
+map/reduce
+markup
+metadata
+method
+microkernels
+microservices
+module
+nanotech
+neural-networks
+object-storage
+package
+packet-routing
+paradigm
+pipelining
+plugin
+policy-as-code
+polling
+predictive-analytics
+predictive-maintenance
+protoype
+proxy
+quantum-entanglement
 realtime
 realtime-java
-API
-service
-event
-polling
-injection
-pipelining
-firewall
-standard
-resource-re/deallocation
-GPU
-shader
-hyper-converged ^
-kubernetes
-off-the-shelf |
-bare-metal |
-infrastructure
-planet-scale |
-hybrid ^
-best-of-breed |
-DevOps |
-data-science |
-agile ^
-advanced ^
-leveraged ^
-extended ^
-basic ^
-gamified ^
-functional ^
-bug-free ^
-future ^
-core
-hardware
-software
-database
-rich-client
-DOM
-CSS
-CMS
-AMP
-docker
-map/reduce
 reduce/map
-descriptor
-hypervisor
-callback
-method
-table
-package
-plugin
-browser
-extension
-software ^
-open-source ^
-disruptive ^
-revolutionary ^
-module
-proxy
-task
-protoype
-test
-hosting
-wrapper
-storage
-social ^
-private ^
-component
-markup
-lifecycle
-flexible ^
-patented ^
-abstract ^
-stateless ^
-optimized ^
-virtualized ^
-scale-out ^
-session |
-high-performance |
-general-purpose |
-out-scaling |
-generic ^
-property |
-secure ^
-mobile-first ^
-overflow-preventing ^
-non-blocking ^
-self-healing ^
-ISO-certified ^
-encrypted ^
-proven ^
-open ^
-rapid ^
-RESTful ^
-legacy ^
-content-addressed ^
-asynchronous ^
-object-oriented ^
-immutable ^
-containerized ^
-anonymous ^
-transactional ^
-distributed ^
-structured ^
-managed ^
-webscale ^
-lossless ^
-decentralized ^
-scalable ^
-virtual ^
-shared ^
-stable ^
-SQL *
-JSON *
-XML *
-NodeJS *
-YAML *
-XMPP *
-SOAP *
-HTML *
-AJAX *
-ORM *
-SVG *
-ACPI *
-PHP *
-WEB2.0 *
-SSL *
-TLS *
-FTP *
-SSH *
-HTTP *
-TOR *
-layer $
-element $
-manager $
-frontend $
-backend $
-control $
-controller $
-framework $
-database $
-generator $
-optimizer $
-interface $
-solution $
-dependency $
-locator $
--oriented %
--based %
--aware %
--scale %
--driven %
-microservices
-blockchain
-AI
-ML
-DL
-IoT
-Edge-computing
-Zero-trust
-Serverless
-Observability
-Kubernetes-native
-Multi-cloud
-FinOps
-Site-reliability-engineering
-Privacy-first
-Event-driven
-Quantum-safe
-Full-stack
-Reactive
-Eventual-consistency
-Privacy-enhancing
-Green-computing
-Zero-downtime
-Elastic
-Data-mesh
-Data-lake
-decentralized ^
-composable ^
-automated ^
-fault-tolerant ^
-industry-grade ^
-low-latency ^
-energy-efficient ^
-highly-available ^
-real-time ^
-multi-tenant ^
-micro-optimized ^
-future-proof ^
-cross-platform ^
-developer-friendly ^
-multi-language ^
-memory-safe ^
-compliance-focused ^
-performance-tuned ^
-user-centric ^
-accessibility-first ^
--agnostic %
--centric %
--bound %
--oriented %
--proof %
--level %
--enabled %
--compatible %
--integrated %
--secure %
--focused %
--deployed %
--generated %
--clustered %
-gRPC *
-MQTT *
-S3 *
-WebSocket *
-GraphQL *
-Avro *
-Parquet *
-Thrift *
-Protobuf *
-BGP *
-DHCP *
-DNS *
-SNMP *
-API-gateway $
-container-runtime $
-workload-manager $
-orchestration-tool $
-identity-provider $
-CI/CD-pipeline $
-access-control-system $
-monitoring-stack $
-network-fabric $
-data-pipeline $
-storage-bucket $
-logging-service $
-metrics-exporter $
-service-discovery-layer $
-unicorn
-synergy
-disruption
-leverage
-paradigm
-thought-leader
-innovation
-alignment
-growth-hacking
-ecosystem
-collaboration
-empowerment
-microkernels
-virtual-desktop
-cross-compiler
-packet-routing
-quantum-entanglement
-block-device
-distributed-ledger
-nanotech
-deep-inference
-auto-scaling
+replication
+resource-re/deallocation
+rich-client
 self-describing
-predictive-analytics
-data-governance
-key-value
-function-as-a-service
-headless
+service
+shader
+singleton
+software
+standard
+storage
+strategy
 stream-processing
-identity-federation
-data-obfuscation
-auto-discovery
-policy-as-code
-edge-optimized
-event-streaming
-context-switching
-sandboxed ^
-hyper-threaded ^
-low-power ^
-end-to-end ^
-post-quantum ^
-vendor-neutral ^
-auto-healing ^
-long-tail ^
-high-bandwidth ^
-cognitive ^
-dev-friendly ^
-network-resilient ^
-error-correcting ^
-AI-first ^
-container-native ^
-policy-driven ^
-intent-based ^
-multi-model ^
-ML-powered ^
-self-optimizing ^
-compliance-driven ^
-dependency-aware ^
-quantum-resistant ^
-high-availability ^
-performance-optimized ^
-infrastructure-as-code ^
-cyber-resilient ^
-multi-architecture ^
-process-isolated ^
-scale-ready ^
-container-first ^
-modular-design ^
-hardware-accelerated ^
-runtime-optimized ^
-interoperable ^
-standards-compliant ^
-debug-friendly ^
-fault-isolated ^
-stateful ^
-data-deduplicated ^
-server-based ^
-cloud-first ^
-design-driven ^
-API-first ^
-environment-aware ^
-interchangeable ^
-rule-based ^
-self-managed ^
-data-driven ^
-latency-free ^
-failure-tolerant ^
-proxy-aware ^
-autonomous ^
-lightweight ^
-fault-tolerant ^
-noise-free ^
-eventually-consistent ^
-debuggable ^
-cloud-ready ^
-data-agnostic ^
-performance-centric ^
-latency-optimized ^
-multi-cloud-ready ^
-disruption-free ^
-proactive ^
-dynamic-scaling ^
-immutable-snapshot ^
-secure-boot ^
-trusted-computing ^
-cryptographically-secure ^
-scalability-aware ^
-virtualization-aware ^
-encrypted-storage ^
-high-resilience ^
-disaster-recovery ^
-log-structured ^
-index-free ^
-multi-tenant-safe ^
-fault-repairing ^
-adaptive-scaling ^
-hybrid-cloud ^
-workflow-automation ^
-meta-tagged ^
-composable-API ^
-API-contract ^
-self-serviced ^
-collaborative-editing ^
-event-notifications ^
-low-code ^
-no-code ^
-deep-learning ^
-self-deploying ^
-AI-generated ^
-fault-predicting ^
-self-balancing ^
-log-monitoring ^
-runtime-isolation ^
-file-indexing ^
-policy-enforcement ^
-throughput-optimized ^
-configurable-pipeline ^
-dynamic-reload ^
-semantic-logging ^
-quantum-ready ^
-cluster-management ^
-state-replication ^
-consensus-based ^
-leader-election ^
-transaction-consistent ^
-geo-redundant ^
-elastic-storage ^
-read-optimized ^
-write-optimized ^
-auto-snapshotting ^
-data-streaming ^
-protocol-gateway $
-state-encoder $
-task-runner $
-data-lakehouse $
-file-storage $
-object-cache $
-config-manager $
-plugin-host $
-state-synchronizer $
-resource-manager $
-data-shard $
-log-aggregator $
-task-scheduler $
-queue-manager $
-event-listener $
-process-engine $
-template-renderer $
-dependency-injector $
-transaction-handler $
-state-manager $
-stream-handler $
-recovery-agent $
-load-balancer $
-dynamic-router $
-debugger $
-runtime-wrapper $
-protocol-adapter $
-log-exporter $
-config-loader $
-plugin-connector $
-workflow-executor $
-event-broker $
-session-store $
-resource-allocator $
-event-publisher $
-transaction-logger $
-backend-router $
-proxy-layer $
-frontend-renderer $
-dynamic-resolver $
-content-gateway $
-queue-handler $
-dependency-resolver $
-runtime-generator $
-script-runner $
-file-renderer $
-policy-agent $
-data-indexer $
-data-router $
-scheduler-core $
-build-tool $
-state-monitor $
-task-runner $
-api-server $
-signal-handler $
-event-trigger $
-connection-broker $
-message-bus $
+streaming-analytics
+synergy
+table
+task
+template
+test
+thought-leader
+unicorn
+virtual-desktop
+wrapper
+!DevOps
+!NoSQL
+!bare-metal
+!best-of-breed
+!data-science
+!flat-hierarchy
+!general-purpose
+!high-performance
+!off-the-shelf
+!out-scaling
+!persistence
+!planet-scale
+!property
+!scripting
+!self-signing
+!session
 
+%start
+AI-first
+AI-generated
+API-contract
+API-first
+ISO-certified
+ML-powered
+RESTful
+abstract
+accessibility-first
+adaptive-scaling
+advanced
+agile
+algorithmic
+anonymous
+asynchronous
+auto-healing
+auto-snapshotting
+automated
+autonomous
+autonomous-ready
+basic
+bug-free
+cloud-first
+cloud-ready
+cluster-management
+cognitive
+collaborative-editing
+compliance-driven
+compliance-focused
+composable
+composable-API
+configurable-pipeline
+consensus-based
+container-first
+container-native
+containerized
+content-addressed
+cross-environment
+cross-platform
+cryptographically-secure
+cyber-resilient
+data-agnostic
+data-deduplicated
+data-driven
+data-streaming
+debug-friendly
+debuggable
+decentralized
+decentralized
+deep-learning
+deep-learning-ready
+dependency-aware
+design-driven
+dev-friendly
+developer-friendly
+developer-optimized
+disaster-recovery
+disruption-free
+disruptive
+distributed
+dynamic-reload
+dynamic-scaling
+elastic-storage
+encrypted
+encrypted-storage
+end-to-end
+energy-efficient
+environment-aware
+error-correcting
+event-notifications
+eventually-consistent
+extended
+failure-tolerant
+fault-isolated
+fault-predicting
+fault-repairing
+fault-tolerant
+fault-tolerant
+file-indexing
+flexible
+functional
+future
+future-proof
+gamified
+generic
+geo-redundant
+geo-scaled
+hardware-accelerated
+high-availability
+high-bandwidth
+high-resilience
+highly-available
+hybrid
+hybrid-cloud
+hyper-converged
+hyper-threaded
+immutable
+immutable-snapshot
+index-free
+industry-grade
+infrastructure-as-code
+intent-based
+interchangeable
+interoperable
+latency-free
+latency-optimized
+leader-election
+legacy
+leveraged
+lightweight
+log-monitoring
+log-structured
+long-tail
+lossless
+low-code
+low-latency
+low-power
+managed
+memory-efficient
+memory-safe
+meta-tagged
+micro-optimized
+mobile-first
+modular-design
+multi-architecture
+multi-cloud-ready
+multi-language
+multi-model
+multi-tenant
+multi-tenant-safe
+near-realtime
+network-resilient
+no-code
+noise-free
+non-blocking
+object-oriented
+open
+open-source
+optimized
+overflow-preventing
+patented
+performance-centric
+performance-optimized
+performance-tuned
+policy-driven
+policy-enabled
+policy-enforcement
+post-quantum
+private
+proactive
+process-isolated
+proven
+proxy-aware
+quantum-ready
+quantum-resistant
+rapid
+read-optimized
+real-time
+resilient
+revolutionary
+rule-based
+runtime-isolation
+runtime-optimized
+sandboxed
+scalability-aware
+scalable
+scale-out
+scale-ready
+secure
+secure-boot
+self-balancing
+self-deploying
+self-healing
+self-managed
+self-optimizing
+self-serviced
+semantic-logging
+server-agnostic
+server-based
+shared
+social
+software
+stable
+standards-compliant
+state-replication
+stateful
+stateless
+structured
+throughput-optimized
+transaction-consistent
+transactional
+trusted-computing
+user-centric
+vendor-neutral
+virtual
+virtualization-aware
+virtualized
+webscale
+workflow-automation
+write-optimized
+
+%end
+API-gateway
+CI/CD-pipeline
+access-control-system
+api-server
+backend
+backend-router
+build-tool
+compliance-framework
+config-loader
+config-manager
+connection-broker
+container-runtime
+content-gateway
+control
+controller
+data-indexer
+data-lakehouse
+data-lifecycle-manager
+data-pipeline
+data-router
+data-shard
+database
+debugger
+dependency
+dependency-injector
+dependency-resolver
+distributed-cache
+dynamic-resolver
+dynamic-router
+element
+event-broker
+event-listener
+event-publisher
+event-stream
+event-trigger
+failure-detection-module
+file-renderer
+file-storage
+framework
+frontend
+frontend-renderer
+generator
+identity-provider
+interface
+layer
+load-balancer
+locator
+log-aggregator
+log-analysis-tool
+log-exporter
+logging-service
+manager
+message-bus
+message-queue
+metrics-exporter
+monitoring-stack
+network-fabric
+object-cache
+optimizer
+orchestration-tool
+plugin-connector
+plugin-host
+policy-agent
+process-engine
+protocol-adapter
+protocol-gateway
+proxy-layer
+queue-handler
+queue-manager
+recovery-agent
+resource-allocator
+resource-manager
+runtime-generator
+runtime-orchestrator
+runtime-wrapper
+scheduler-core
+script-runner
+security-layer
+service-discovery-layer
+session-store
+signal-handler
+solution
+state-encoder
+state-manager
+state-monitor
+state-synchronizer
+storage-bucket
+stream-handler
+task-runner
+task-runner
+task-scheduler
+template-renderer
+transaction-handler
+transaction-logger
+transaction-validator
+workflow-executor
+workload-balancer
+workload-manager
+
+%suffix
+-agnostic
+-aware
+-based
+-bound
+-centric
+-clustered
+-compatible
+-deployed
+-driven
+-enabled
+-first
+-focused
+-generated
+-integrated
+-intelligent
+-level
+-oriented
+-performant
+-proof
+-scale
+-scaled
+-secure
+-sensitive
+
+%protocol
+ACPI
+AJAX
+Avro
+BGP
+DHCP
+DNS
+FTP
+SFTP
+GraphQL
+HTML
+HTTP
+JSON
+MQTT
+NodeJS
+HTTP2
+IPFS
+Kafka
+NATS
+OTLP
+SPDY
+Gopher
+ORM
+PHP
+Parquet
+Protobuf
+S3
+SNMP
+SOAP
+SQL
+SSH
+SSL
+SVG
+TLS
+TOR
+Thrift
+WEB2.0
+WebSocket
+XML
+9P2000
+XMPP
+YAML
+gRPC

@@ -1,0 +1,8 @@
+Usage: bullshit [-h] [-f file] [times]
+
+Generate one or more nonsense phrases by randomly combining words and phrases from a predefined data file.
+The phrases are constructed using categories such as starting words, suffixes, protocols, and endings, producing jargon-filled or humorous output.
+
+Options:
+  -h --help .......... print usage and exit
+  -f --file <input> .. input file

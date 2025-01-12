@@ -1,4 +1,4 @@
-.TH BULLSHIT 1 "January 2025" "Python Bullshit Generator" "User Commands"
+.TH BULLSHIT 1 "January 2025" "Bullshit Generator" "User Commands"
 .SH NAME
 \fBbullshit\fP \- generate random nonsense phrases from words in a file
 .SH SYNOPSIS
@@ -11,7 +11,9 @@ By default, \fBbullshit\fP looks for a word file in the following order:
 .IP 1.
 The path specified in the environment variable \fBBULLSHIT_FILE\fP.
 .IP 2.
-The file \fB~/.bullshit\fP in the user's home directory.
+The file \fB~/$XDG_CONFIG_HOME/bullshit.txt\fP or \fB~/.config/bullshit.txt\fP in the user's home directory.
+.IP 3.
+The file \fB/usr/share/bullshit.txt\fP.
 
 The generated nonsense may include technical buzzwords, protocols, and random combinations, making it useful for parody, creative output, or fun.
 
@@ -82,4 +84,4 @@ Specifies the default data file if set.
 Fallback default data file.
 
 .SH HISTORY
-\fBbullshit\fP first appeared as part of Plan 9’s 9front distribution (August 2011). This Python implementation retains the original spirit of generating random nonsense phrases.
+\fBbullshit\fP first appeared as part of Plan 9’s 9front distribution (August 2011).

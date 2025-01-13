@@ -19,10 +19,8 @@ The **Bullshit Generator** is a program inspired by Plan 9's [`bullshit`](http:/
 
 ## Installation
 
-Clone the repository and make the script executable:
+Clone the repository and build `bullshit` using the Go Compiler:
 ```bash
-git clone https://github.com/friedelschoen/bullshit.git
-cd bullshit
 go build bullshit.go
 ```
 
@@ -70,4 +68,4 @@ This project is licensed under the Zlib License. See the [LICENSE](LICENSE) file
 
 ## Credits
 
-This program is inspired by the `bullshit` command from [9front's](https://git.9front.org/plan9front/plan9front/master/rc/bin/bullshit/f.html).
+This program is inspired by the `bullshit` command from [9front's](https://git.9front.org/plan9front/plan9front/HEAD/rc/bin/bullshit/f.html).

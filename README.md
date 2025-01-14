@@ -24,6 +24,9 @@ Clone the repository and build `bullshit` using the Go Compiler:
 go build bullshit.go
 ```
 
+- `9front.txt` does contain all words which are provided in 9front
+- `bullshit.txt` does contain an extended list of words for generating phases
+
 ## Usage
 
 ```bash

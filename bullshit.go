@@ -2,14 +2,14 @@ package main
 
 import (
 	"bufio"
-	_ "embed"
 	"fmt"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"slices"
-	"strconv"
 	"strings"
+
+	"flag"
 )
 
 var (
@@ -22,8 +22,8 @@ func fileExist(path string) bool {
 	return err == nil
 }
 
-// locateFile determines the path to the data file based on environment variables or defaults.
-func locateFile() string {
+// defaultInputFile determines the path to the data file based on environment variables or defaults.
+func defaultInputFile() string {
 	if path, exists := os.LookupEnv("BULLSHIT_FILE"); exists {
 		if fileExist(path) {
 			return path
@@ -62,13 +62,13 @@ func loadData(filePath string) error {
 		switch {
 		case strings.HasPrefix(line, "%"):
 			currentCategory = line[1:]
-			words[currentCategory] = []string{}
 		case strings.HasPrefix(line, "!"):
 			line = line[1:]
 			noends[line] = true
 			fallthrough
 		default:
-			words[currentCategory] = append(words[currentCategory], line)
+			slc, _ := words[currentCategory]
+			words[currentCategory] = append(slc, line)
 		}
 	}
 
@@ -158,22 +158,6 @@ func generateBullshit() {
 	}
 }
 
-// min returns the smaller of two integers.
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-//go:embed help.txt
-var helpmsg string
-
-func usage(exit int) {
-	fmt.Print(helpmsg)
-	os.Exit(exit)
-}
-
 func printSorted() {
 	keys := make([]string, len(words))
 	i := 0
@@ -206,53 +190,34 @@ func printSorted() {
 	}
 }
 
-func main() {
-	file := ""
-	sort := false
-	times := 1
-	var err error
-	for i := 1; i < len(os.Args); i++ {
-		switch os.Args[i] {
-		case "-f", "--file":
-			if i == len(os.Args)-1 {
-				fmt.Fprintf(os.Stderr, "error: `%s` requires an argument\n", os.Args[i])
-				os.Exit(1)
-			}
-			i++
-			file = os.Args[i]
-		case "-s", "--sort":
-			sort = true
-			i++
-		default:
-			if os.Args[i][0] == '-' {
-				fmt.Fprintf(os.Stderr, "error: unknown option `%s`\n", os.Args[i])
-				os.Exit(1)
-			}
-			times, err = strconv.Atoi(os.Args[i])
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "error: invalid integer `%s`\n", os.Args[i])
-				os.Exit(1)
-			}
-		}
-	}
+const description = "Generate one or more nonsense phrases by randomly\ncombining words and phrases from a predefined data file.\n" +
+	"The phrases are constructed using categories such as starting words,\nsuffixes, protocols, and endings, producing jargon-filled or humorous output."
 
-	// Locate the file if not provided
-	if file == "" {
-		file = locateFile()
+func main() {
+	file := flag.String("input", defaultInputFile(), "input wordlist")
+	times := flag.Int("count", 1, "sentences to generate")
+	sort := flag.Bool("sort", false, "sort the wordlist and print it to stdout")
+
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "%s\n\n", description)
+		flag.PrintDefaults()
 	}
+	flag.Parse()
 
 	// Load data
-	err = loadData(file)
+	err := loadData(*file)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: unable to load file at %s: %v\n", file, err)
+		fmt.Fprintf(os.Stderr, "error: unable to load file at %s: %v\n", *file, err)
 		os.Exit(1)
 	}
 
-	if sort {
+	if *sort {
 		printSorted()
-	} else {
-		for i := 0; i < times; i++ {
-			generateBullshit()
-		}
+		return
+	}
+
+	for i := 0; i < *times; i++ {
+		generateBullshit()
 	}
 }

@@ -98,7 +98,8 @@ func generateBullshit(words *wordList, noends map[string]struct{}) string {
 	numStarts := rand.Intn(4)
 	for range numStarts {
 		lastword = randomChoice(words.Start)
-		fmt.Fprintf(&buf, "%s ", lastword)
+		buf.WriteString(lastword)
+		buf.WriteRune(' ')
 		outputCount++
 	}
 
@@ -111,12 +112,12 @@ func generateBullshit(words *wordList, noends map[string]struct{}) string {
 	for range numWords {
 		lastword = randomChoice(words.Word)
 		hassuffix = rand.Float64() < 0.2
+		buf.WriteString(lastword)
 		if hassuffix {
 			suffix := randomChoice(words.Suffix)
-			fmt.Fprintf(&buf, "%s%s ", lastword, suffix)
-		} else {
-			fmt.Fprintf(&buf, "%s ", lastword)
+			buf.WriteString(suffix)
 		}
+		buf.WriteRune(' ')
 		outputCount++
 	}
 
@@ -125,9 +126,10 @@ func generateBullshit(words *wordList, noends map[string]struct{}) string {
 		numProtocols := rand.Intn(4)
 		for i := range numProtocols {
 			lastword = randomChoice(words.Protocol)
-			fmt.Fprintf(&buf, "%s ", lastword)
+			buf.WriteString(lastword)
+			buf.WriteRune(' ')
 			if i != numProtocols-1 {
-				fmt.Fprintf(&buf, "over ")
+				buf.WriteString("over ")
 			}
 		}
 		outputCount++
@@ -145,12 +147,12 @@ func generateBullshit(words *wordList, noends map[string]struct{}) string {
 	for range numMoreWords {
 		lastword = randomChoice(words.Word)
 		hassuffix = rand.Float64() < 0.2
+		buf.WriteString(lastword)
 		if hassuffix {
 			suffix := randomChoice(words.Suffix)
-			fmt.Fprintf(&buf, "%s%s ", lastword, suffix)
-		} else {
-			fmt.Fprintf(&buf, "%s ", lastword)
+			buf.WriteString(suffix)
 		}
+		buf.WriteRune(' ')
 		outputCount++
 	}
 
@@ -167,7 +169,7 @@ const description = "Generate one or more nonsense phrases by randomly\ncombinin
 
 func main() {
 	file := flag.String("input", defaultInputFile(), "input wordlist")
-	times := flag.Int("count", 1, "sentences to generate")
+	times := flag.Int("count", 1, "phrases to generate")
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n\n", os.Args[0])

@@ -6,16 +6,18 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
-	"slices"
 	"strings"
 
 	"flag"
 )
 
-var (
-	words  = make(map[string][]string)
-	noends = make(map[string]bool)
-)
+type wordList struct {
+	Word     []string
+	Start    []string
+	End      []string
+	Suffix   []string
+	Protocol []string
+}
 
 func fileExist(path string) bool {
 	_, err := os.Stat(path)
@@ -24,19 +26,19 @@ func fileExist(path string) bool {
 
 // defaultInputFile determines the path to the data file based on environment variables or defaults.
 func defaultInputFile() string {
-	if path, exists := os.LookupEnv("BULLSHIT_FILE"); exists {
+	if path := os.Getenv("BULLSHIT_FILE"); path != "" {
 		if fileExist(path) {
 			return path
 		}
 	}
 	if confdir, err := os.UserConfigDir(); err == nil {
-		path := filepath.Join(confdir, "/bullshit.txt")
+		path := filepath.Join(confdir, "bullshit.txt")
 		if fileExist(path) {
 			return path
 		}
 	}
 	if home, err := os.UserHomeDir(); err == nil {
-		path := filepath.Join(home, ".config/bullshit.txt")
+		path := filepath.Join(home, ".config", "bullshit.txt")
 		if fileExist(path) {
 			return path
 		}
@@ -45,14 +47,14 @@ func defaultInputFile() string {
 }
 
 // loadData loads words and their categories from the specified file.
-func loadData(filePath string) error {
+func loadData(filePath string, categories map[string]*[]string, noends map[string]struct{}) error {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return err
 	}
 	defer file.Close()
 
-	var currentCategory string
+	var current *[]string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
@@ -61,14 +63,14 @@ func loadData(filePath string) error {
 		}
 		switch {
 		case strings.HasPrefix(line, "%"):
-			currentCategory = line[1:]
+			name := line[1:]
+			current = categories[name]
 		case strings.HasPrefix(line, "!"):
 			line = line[1:]
-			noends[line] = true
+			noends[line] = struct{}{}
 			fallthrough
 		default:
-			slc, _ := words[currentCategory]
-			words[currentCategory] = append(slc, line)
+			*current = append(*current, line)
 		}
 	}
 
@@ -84,7 +86,9 @@ func randomChoice(options []string) string {
 }
 
 // generateBullshit generates and returns a single nonsense sentence.
-func generateBullshit() {
+func generateBullshit(words *wordList, noends map[string]struct{}) string {
+	var buf strings.Builder
+
 	totalWords := rand.Intn(8) + 3
 	outputCount := 0
 	lastword := ""
@@ -92,9 +96,9 @@ func generateBullshit() {
 
 	// Add starting words
 	numStarts := rand.Intn(4)
-	for i := 0; i < numStarts; i++ {
-		lastword = randomChoice(words["start"])
-		fmt.Printf("%s ", lastword)
+	for range numStarts {
+		lastword = randomChoice(words.Start)
+		fmt.Fprintf(&buf, "%s ", lastword)
 		outputCount++
 	}
 
@@ -104,14 +108,14 @@ func generateBullshit() {
 	if outputCount < totalWords {
 		numWords = rand.Intn(remaining + 1)
 	}
-	for i := 0; i < numWords; i++ {
-		lastword = randomChoice(words["word"])
+	for range numWords {
+		lastword = randomChoice(words.Word)
 		hassuffix = rand.Float64() < 0.2
 		if hassuffix {
-			suffix := randomChoice(words["suffix"])
-			fmt.Printf("%s%s ", lastword, suffix)
+			suffix := randomChoice(words.Suffix)
+			fmt.Fprintf(&buf, "%s%s ", lastword, suffix)
 		} else {
-			fmt.Printf("%s ", lastword)
+			fmt.Fprintf(&buf, "%s ", lastword)
 		}
 		outputCount++
 	}
@@ -119,11 +123,11 @@ func generateBullshit() {
 	// Add protocol section
 	if rand.Float64() > 0.5 {
 		numProtocols := rand.Intn(4)
-		for i := 0; i < numProtocols; i++ {
-			lastword = randomChoice(words["protocol"])
-			fmt.Printf("%s ", lastword)
+		for i := range numProtocols {
+			lastword = randomChoice(words.Protocol)
+			fmt.Fprintf(&buf, "%s ", lastword)
 			if i != numProtocols-1 {
-				fmt.Printf("over ")
+				fmt.Fprintf(&buf, "over ")
 			}
 		}
 		outputCount++
@@ -138,56 +142,24 @@ func generateBullshit() {
 	if outputCount+numMoreWords <= 1 {
 		numMoreWords += 2
 	}
-	for i := 0; i < numMoreWords; i++ {
-		lastword = randomChoice(words["word"])
+	for range numMoreWords {
+		lastword = randomChoice(words.Word)
 		hassuffix = rand.Float64() < 0.2
 		if hassuffix {
-			suffix := randomChoice(words["suffix"])
-			fmt.Printf("%s%s ", lastword, suffix)
+			suffix := randomChoice(words.Suffix)
+			fmt.Fprintf(&buf, "%s%s ", lastword, suffix)
 		} else {
-			fmt.Printf("%s ", lastword)
+			fmt.Fprintf(&buf, "%s ", lastword)
 		}
 		outputCount++
 	}
 
 	// Optionally add an ending
-	if rand.Float64() < 0.1 || noends[lastword] || hassuffix {
-		fmt.Printf("%s\n", randomChoice(words["end"]))
-	} else {
-		fmt.Println()
+	_, dontend := noends[lastword]
+	if dontend || hassuffix || rand.Float64() < 0.1 {
+		fmt.Print(randomChoice(words.End))
 	}
-}
-
-func printSorted() {
-	keys := make([]string, len(words))
-	i := 0
-	for key := range words {
-		keys[i] = key
-		i++
-	}
-	slices.Sort(keys)
-	for i, key := range keys {
-		values := words[key]
-		if i > 0 {
-			fmt.Println()
-		}
-		fmt.Println("%" + key)
-		slices.SortFunc(values, func(left, right string) int {
-			if noends[left] != noends[right] {
-				if noends[left] {
-					return 1
-				}
-				return -1
-			}
-			return strings.Compare(left, right)
-		})
-		for _, value := range values {
-			if noends[value] {
-				fmt.Print("!")
-			}
-			fmt.Println(value)
-		}
-	}
+	return buf.String()
 }
 
 const description = "Generate one or more nonsense phrases by randomly\ncombining words and phrases from a predefined data file.\n" +
@@ -196,7 +168,6 @@ const description = "Generate one or more nonsense phrases by randomly\ncombinin
 func main() {
 	file := flag.String("input", defaultInputFile(), "input wordlist")
 	times := flag.Int("count", 1, "sentences to generate")
-	sort := flag.Bool("sort", false, "sort the wordlist and print it to stdout")
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n\n", os.Args[0])
@@ -206,18 +177,22 @@ func main() {
 	flag.Parse()
 
 	// Load data
-	err := loadData(*file)
+	var words wordList
+	noends := make(map[string]struct{})
+	err := loadData(*file, map[string]*[]string{
+		"word":     &words.Word,
+		"start":    &words.Start,
+		"end":      &words.End,
+		"suffix":   &words.Suffix,
+		"protocol": &words.Protocol,
+	}, noends)
+
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: unable to load file at %s: %v\n", *file, err)
 		os.Exit(1)
 	}
 
-	if *sort {
-		printSorted()
-		return
-	}
-
 	for i := 0; i < *times; i++ {
-		generateBullshit()
+		fmt.Println(generateBullshit(&words, noends))
 	}
 }

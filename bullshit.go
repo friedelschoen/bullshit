@@ -159,7 +159,7 @@ func generateBullshit(words *wordList, noends map[string]struct{}) string {
 	// Optionally add an ending
 	_, dontend := noends[lastword]
 	if dontend || hassuffix || rand.Float64() < 0.1 {
-		fmt.Print(randomChoice(words.End))
+		buf.WriteString(randomChoice(words.End))
 	}
 	return buf.String()
 }
